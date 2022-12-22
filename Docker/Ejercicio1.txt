@@ -1,0 +1,12 @@
+# Crear Red
+docker network create -d bridge lemoncode-challenge
+# Dockerfile front
+docker build -t front .
+# Correr Front
+docker run -d  --name front --network lemoncode-challenge -p 8080:3000 front
+# Dockerfile back
+docker build -t topics-api .
+# Correr back
+docker run -d --name topics-api --network lemoncode-challenge topics-api
+# Database
+docker run -dit -v data:/etc/mongo --network lemoncode-challenge --name some-mongo mongo

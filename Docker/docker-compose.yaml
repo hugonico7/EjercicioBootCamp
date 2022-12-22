@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  front:
+    image: front:latest
+    container_name: front
+    ports:
+      - "8080:3000"
+    networks:
+      - lemoncode-challenge
+  back:
+    container_name: topics-api
+    image: topics-api:latest
+    networks:
+      - lemoncode-challenge
+networks:
+  lemoncode-challenge:
+    driver: bridge

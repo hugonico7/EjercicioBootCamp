@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset-postgres
+spec:
+  selector:
+    matchLabels:
+      servicio: service-db
+      app: statefulset-postgres
+  serviceName: postgres-db
+  replicas: 1
+  volumeClaimTemplates:
+  - metadata:
+      name: persistant-db
+    spec:
+      storageClassName: persistant-db
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 500Mi
+  template:
+    metadata:
+      labels:
+        servicio: service-db
+        app: statefulset-postgres
+    spec:
+      volumes:
+        - name: configvol
+          configMap:
+            name: cm-db
+      containers:
+      - name: statefulset-postgres
+        image: postgres:10.4
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: persistant-db
+          mountPath: /var/lib/postgresql/data
+        - name: configvol
+          mountPath: /data
+  

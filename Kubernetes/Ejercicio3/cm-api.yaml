@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-todo-api
+data:
+  PORT: "8090"
+  NODE_ENV: "production"

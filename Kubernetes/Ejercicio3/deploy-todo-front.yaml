@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-front
+spec:
+  selector:
+    matchLabels:
+      app: todo-front
+  template:
+    metadata:
+      labels:
+        app: todo-front
+    spec:
+      containers:
+      - name: todo-front
+        image: hugonico7/todo-front
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: cm-todo-front

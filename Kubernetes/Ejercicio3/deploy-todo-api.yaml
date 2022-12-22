@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-api
+spec:
+  selector:
+    matchLabels:
+      app: todo-api
+  template:
+    metadata:
+      labels:
+        app: todo-api
+    spec:
+      containers:
+      - name: todo-api
+        image: hugonico7/todo-api:latest
+        ports:
+        - containerPort: 3000
+        envFrom:
+          - configMapRef:
+              name: cm-todo-api

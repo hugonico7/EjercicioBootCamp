@@ -1,4 +1,10 @@
 version: '3.7'
+
+networks:
+  lemoncode-challenge:
+volumes:
+  data:
+
 services:
   front:
     image: front:latest
@@ -12,6 +18,9 @@ services:
     image: topics-api:latest
     networks:
       - lemoncode-challenge
-networks:
-  lemoncode-challenge:
-    driver: bridge
+  mongodb:
+    image: mongo
+    container_name: some-mongo
+    volumes:
+      - data:/data/db
+

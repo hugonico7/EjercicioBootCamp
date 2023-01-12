@@ -1,0 +1,29 @@
+pipeline {
+  
+  # Ejercicio1
+  # agent any
+
+  # Ejercicio 2
+  agent {
+      docker { image 'gradle:6.6.1-jre14-openj9'}
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/hugonico7/EjercicioCI-CD.git'
+      }
+    }
+    stage('Compile') {
+      steps {
+        chmod +x gradlew
+        sh './gradlew compileJava'
+      }
+    }
+    stage('Unit Tests') {
+      steps {
+        chmod +x gradlew
+        sh './gradlew test'
+      }
+    }
+  }
+}

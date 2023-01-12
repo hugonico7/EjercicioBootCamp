@@ -9,4 +9,4 @@ docker build -t topics-api .
 # Correr back
 docker run -d --name topics-api --network lemoncode-challenge topics-api
 # Database
-docker run -dit -v data:/etc/mongo --network lemoncode-challenge --name some-mongo mongo
+docker run -dit -v data:/data/db --network lemoncode-challenge --name some-mongo mongo
